@@ -1,0 +1,44 @@
+{
+  "entities": [
+    {
+      "start": 167,
+      "end": 217,
+      "label": "FIO_I_2"
+    },
+    {
+      "start": 224,
+      "end": 258,
+      "label": "FIO_I_1"
+    },
+    {
+      "start": 285,
+      "end": 310,
+      "label": "COMPANY"
+    },
+    {
+      "start": 358,
+      "end": 377,
+      "label": "DATE_1"
+    },
+    {
+      "start": 813,
+      "end": 820,
+      "label": "DATE_2"
+    },
+    {
+      "start": 6592,
+      "end": 6692,
+      "label": "ADDR"
+    },
+    {
+      "start": 7086,
+      "end": 7093,
+      "label": "DATE_3"
+    },
+    {
+      "start": 7115,
+      "end": 7149,
+      "label": "FIO_I_1"
+    }
+  ]
+}

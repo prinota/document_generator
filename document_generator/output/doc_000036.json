@@ -1,0 +1,64 @@
+{
+  "entities": [
+    {
+      "start": 49,
+      "end": 101,
+      "label": "FIO_I_1"
+    },
+    {
+      "start": 128,
+      "end": 135,
+      "label": "DATE_1"
+    },
+    {
+      "start": 152,
+      "end": 162,
+      "label": "PASS"
+    },
+    {
+      "start": 215,
+      "end": 285,
+      "label": "ADDR"
+    },
+    {
+      "start": 305,
+      "end": 319,
+      "label": "INN_PER"
+    },
+    {
+      "start": 320,
+      "end": 334,
+      "label": "SNILS"
+    },
+    {
+      "start": 352,
+      "end": 384,
+      "label": "COMPANY"
+    },
+    {
+      "start": 385,
+      "end": 402,
+      "label": "DATE_2"
+    },
+    {
+      "start": 699,
+      "end": 708,
+      "label": "PHONE"
+    },
+    {
+      "start": 744,
+      "end": 770,
+      "label": "EMAIL"
+    },
+    {
+      "start": 947,
+      "end": 989,
+      "label": "FIO_I_2"
+    },
+    {
+      "start": 1001,
+      "end": 1006,
+      "label": "DATE_3"
+    }
+  ]
+}
