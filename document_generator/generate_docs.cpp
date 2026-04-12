@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <filesystem>
+#include <iomanip>
+#include <sstream>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -21,13 +23,13 @@ struct Entity {
     std::string label;
 };
 
-//связанные словари (падежи ФИО)
 const std::set<std::string> PERSON_TYPES = {
     "FIO_I", "FIO_R", "FIO_D", "FIO_V", "FIO_T", "FIO_P"
 };
 
-//глобальные счётчики для каждого словаря
 std::map<std::string, size_t> globalCounters;
+
+int globalDocumentCounter = 1;
 
 
 std::map<std::string, std::vector<std::string>> loadAllDictionaries(
@@ -145,7 +147,9 @@ std::pair<std::string, std::vector<Entity>> renderDocument(
 
     std::map<std::string, size_t> assignedIndexes;
 
-    for (const auto& [base, maxIdx] : maxInstanceIndex) {
+    for (const auto& pair : maxInstanceIndex) {
+        const std::string& base = pair.first;
+        int maxIdx = pair.second;
         if (dicts.find(base) != dicts.end() && !dicts[base].empty()) {
             for (int i = 1; i <= maxIdx; i++) {
                 std::string key = base + "_" + std::to_string(i);
@@ -203,6 +207,52 @@ std::pair<std::string, std::vector<Entity>> renderDocument(
 }
 
 
+std::string getDocumentFilename(int docNumber) {
+    std::ostringstream filename;
+    filename << "doc_" << std::setw(6) << std::setfill('0') << docNumber;
+    return filename.str();
+}
+
+std::string formatEntitiesJson(const std::vector<Entity>& entities) {
+    std::ostringstream json;
+    json << "{\n  \"entities\": [\n";
+
+    for (size_t i = 0; i < entities.size(); ++i) {
+        json << "    {\n";
+        json << "      \"start\": " << entities[i].start << ",\n";
+        json << "      \"end\": " << entities[i].end << ",\n";
+        json << "      \"label\": \"" << entities[i].label << "\"\n";
+        json << "    }";
+        if (i != entities.size() - 1) {
+            json << ",";
+        }
+        json << "\n";
+    }
+
+    json << "  ]\n}";
+    return json.str();
+}
+
+void saveTextDocument(const std::string& filepath, const std::string& text) {
+    std::ofstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Error: Cannot create file " << filepath << std::endl;
+        return;
+    }
+    file << text;
+    file.close();
+}
+
+void saveJsonDocument(const std::string& filepath, const std::vector<Entity>& entities) {
+    std::ofstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Error: Cannot create file " << filepath << std::endl;
+        return;
+    }
+    file << formatEntitiesJson(entities);
+    file.close();
+}
+
 void appendToJsonl(const std::string& filename,
     const std::string& text,
     const std::vector<Entity>& entities) {
@@ -243,6 +293,7 @@ void appendToJsonl(const std::string& filename,
     file.close();
 }
 
+
 std::vector<std::string> findAllTemplates(const std::string& rootPath) {
     std::vector<std::string> templates;
 
@@ -269,7 +320,6 @@ std::vector<std::string> findAllTemplates(const std::string& rootPath) {
 }
 
 
-
 int main() {
 #ifdef _WIN32
     SetConsoleOutputCP(65001);
@@ -278,11 +328,11 @@ int main() {
 
     srand((unsigned int)time(NULL));
 
-    // ===== НАСТРОЙКИ =====
+    // ===== SETTINGS =====
     std::string dataFolder = "./data";
     std::string templatesRoot = "./templates";
     std::string outputFolder = "./output";
-    std::string outputFile = "dataset.jsonl";  
+    std::string outputJsonl = "dataset.jsonl";  
     int documentsPerTemplate = 10;
     // =====================
 
@@ -308,12 +358,10 @@ int main() {
     fileMapping["SNILS"] = "snils.txt";
     fileMapping["DATE"] = "date.txt";
 
-    //загрузка словарёв
     std::cout << "Loading dictionaries...\n";
     std::map<std::string, std::vector<std::string>> dicts = loadAllDictionaries(fileMapping, dataFolder);
     std::cout << "Dictionaries loaded.\n\n";
 
-    //поиск шаблонов
     std::cout << "Searching for templates...\n";
     std::vector<std::string> templates = findAllTemplates(templatesRoot);
 
@@ -328,14 +376,12 @@ int main() {
     }
     std::cout << "\n";
 
-    //счётчики
-    for (auto& [key, counter] : globalCounters) {
-        counter = 0;
+    for (auto& pair : globalCounters) {
+        pair.second = 0;
     }
 
-    //создание/очистка файла-результата
-    std::string fullOutputPath = outputFolder + "/" + outputFile;
-    std::ofstream clearFile(fullOutputPath);
+    std::string fullJsonlPath = outputFolder + "/" + outputJsonl;
+    std::ofstream clearFile(fullJsonlPath);
     clearFile.close();
 
     int totalDocuments = 0;
@@ -344,7 +390,6 @@ int main() {
     for (size_t t = 0; t < templates.size(); t++) {
         const std::string& templatePath = templates[t];
 
-        //загрузка шаблона
         std::ifstream templFile(templatePath);
         if (!templFile.is_open()) {
             std::cerr << "  ERROR: Cannot open template, skipping...\n";
@@ -355,10 +400,24 @@ int main() {
             std::istreambuf_iterator<char>());
         templFile.close();
 
-        //генерация документов и их запись в Jsonl
+        if (templ.empty()) {
+            std::cerr << "  WARNING: Empty template, skipping...\n";
+            continue;
+        }
+
         for (int i = 0; i < documentsPerTemplate; i++) {
             auto [text, entities] = renderDocument(templ, dicts);
-            appendToJsonl(fullOutputPath, text, entities);
+
+            std::string baseFilename = getDocumentFilename(globalDocumentCounter);
+            std::string txtPath = outputFolder + "/" + baseFilename + ".txt";
+            std::string jsonPath = outputFolder + "/" + baseFilename + ".json";
+
+            saveTextDocument(txtPath, text);
+            saveJsonDocument(jsonPath, entities);
+
+            appendToJsonl(fullJsonlPath, text, entities);
+
+            globalDocumentCounter++;
         }
 
         totalDocuments += documentsPerTemplate;
