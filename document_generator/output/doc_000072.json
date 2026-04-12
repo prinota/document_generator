@@ -1,0 +1,74 @@
+{
+  "entities": [
+    {
+      "start": 44,
+      "end": 61,
+      "label": "COMPANY"
+    },
+    {
+      "start": 62,
+      "end": 112,
+      "label": "FIO_D_2"
+    },
+    {
+      "start": 119,
+      "end": 165,
+      "label": "FIO_R_1"
+    },
+    {
+      "start": 212,
+      "end": 228,
+      "label": "PHONE_1"
+    },
+    {
+      "start": 235,
+      "end": 255,
+      "label": "EMAIL"
+    },
+    {
+      "start": 464,
+      "end": 474,
+      "label": "DATE_2"
+    },
+    {
+      "start": 480,
+      "end": 485,
+      "label": "DATE_3"
+    },
+    {
+      "start": 772,
+      "end": 789,
+      "label": "DATE_4"
+    },
+    {
+      "start": 1085,
+      "end": 1097,
+      "label": "PHONE_2"
+    },
+    {
+      "start": 1099,
+      "end": 1119,
+      "label": "EMAIL"
+    },
+    {
+      "start": 1139,
+      "end": 1151,
+      "label": "SNILS"
+    },
+    {
+      "start": 1192,
+      "end": 1254,
+      "label": "ADDR"
+    },
+    {
+      "start": 1266,
+      "end": 1273,
+      "label": "DATE_1"
+    },
+    {
+      "start": 1343,
+      "end": 1389,
+      "label": "FIO_I_1"
+    }
+  ]
+}

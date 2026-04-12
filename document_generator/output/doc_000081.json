@@ -1,0 +1,99 @@
+{
+  "entities": [
+    {
+      "start": 55,
+      "end": 105,
+      "label": "FIO_I_1"
+    },
+    {
+      "start": 107,
+      "end": 112,
+      "label": "DATE_3"
+    },
+    {
+      "start": 196,
+      "end": 267,
+      "label": "ADDR"
+    },
+    {
+      "start": 331,
+      "end": 352,
+      "label": "COMPANY"
+    },
+    {
+      "start": 356,
+      "end": 366,
+      "label": "DATE_5"
+    },
+    {
+      "start": 642,
+      "end": 663,
+      "label": "COMPANY"
+    },
+    {
+      "start": 1008,
+      "end": 1018,
+      "label": "DATE_5"
+    },
+    {
+      "start": 1041,
+      "end": 1046,
+      "label": "DATE_6"
+    },
+    {
+      "start": 1052,
+      "end": 1083,
+      "label": "DATE_7"
+    },
+    {
+      "start": 1631,
+      "end": 1646,
+      "label": "DATE_1"
+    },
+    {
+      "start": 1652,
+      "end": 1657,
+      "label": "DATE_2"
+    },
+    {
+      "start": 1992,
+      "end": 1999,
+      "label": "PHONE"
+    },
+    {
+      "start": 2032,
+      "end": 2055,
+      "label": "EMAIL"
+    },
+    {
+      "start": 2304,
+      "end": 2309,
+      "label": "DATE_6"
+    },
+    {
+      "start": 2315,
+      "end": 2346,
+      "label": "DATE_7"
+    },
+    {
+      "start": 2359,
+      "end": 2369,
+      "label": "DATE_4"
+    },
+    {
+      "start": 2417,
+      "end": 2438,
+      "label": "COMPANY"
+    },
+    {
+      "start": 2440,
+      "end": 2500,
+      "label": "FIO_D_2"
+    },
+    {
+      "start": 2508,
+      "end": 2558,
+      "label": "FIO_I_1"
+    }
+  ]
+}

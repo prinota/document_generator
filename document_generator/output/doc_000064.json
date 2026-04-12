@@ -1,0 +1,49 @@
+{
+  "entities": [
+    {
+      "start": 364,
+      "end": 387,
+      "label": "COMPANY"
+    },
+    {
+      "start": 820,
+      "end": 874,
+      "label": "FIO_I"
+    },
+    {
+      "start": 984,
+      "end": 1007,
+      "label": "COMPANY"
+    },
+    {
+      "start": 2248,
+      "end": 2258,
+      "label": "DATE_1"
+    },
+    {
+      "start": 7404,
+      "end": 7413,
+      "label": "PHONE"
+    },
+    {
+      "start": 7463,
+      "end": 7484,
+      "label": "EMAIL"
+    },
+    {
+      "start": 7555,
+      "end": 7648,
+      "label": "ADDR"
+    },
+    {
+      "start": 8427,
+      "end": 8437,
+      "label": "DATE_2"
+    },
+    {
+      "start": 8494,
+      "end": 8548,
+      "label": "FIO_I"
+    }
+  ]
+}

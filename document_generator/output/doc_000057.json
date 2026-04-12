@@ -1,0 +1,64 @@
+{
+  "entities": [
+    {
+      "start": 351,
+      "end": 385,
+      "label": "COMPANY"
+    },
+    {
+      "start": 906,
+      "end": 956,
+      "label": "FIO_I_2"
+    },
+    {
+      "start": 963,
+      "end": 1009,
+      "label": "FIO_I_1"
+    },
+    {
+      "start": 1035,
+      "end": 1069,
+      "label": "COMPANY"
+    },
+    {
+      "start": 2212,
+      "end": 2231,
+      "label": "DATE_1"
+    },
+    {
+      "start": 2481,
+      "end": 2491,
+      "label": "DATE_2"
+    },
+    {
+      "start": 4013,
+      "end": 4032,
+      "label": "DATE_3"
+    },
+    {
+      "start": 4089,
+      "end": 4135,
+      "label": "FIO_I_1"
+    },
+    {
+      "start": 4221,
+      "end": 4240,
+      "label": "DATE_3"
+    },
+    {
+      "start": 4291,
+      "end": 4351,
+      "label": "FIO_I_3"
+    },
+    {
+      "start": 4532,
+      "end": 4578,
+      "label": "FIO_I_1"
+    },
+    {
+      "start": 4580,
+      "end": 4597,
+      "label": "DATE_4"
+    }
+  ]
+}
